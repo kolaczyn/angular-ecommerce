@@ -1,10 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { map } from 'rxjs';
-import { ProductsRespose } from 'src/types';
-
-const PRODUCTS_URL =
-  'https://v5stg.rossmann.pl/products/v2/api/Products?ShopNumber=735&PageSize=15&Page=1';
+import { ProductsService } from './services/products.service';
 
 @Component({
   selector: 'app-root',
@@ -15,11 +10,11 @@ export class AppComponent {
   title = 'product-filters';
   counter = 0;
 
-  constructor(private http: HttpClient) {}
+  constructor(private products: ProductsService) {}
 
-  products$ = this.http
-    .get<ProductsRespose>(PRODUCTS_URL)
-    .pipe(map((x) => x.data.products));
+  get products$() {
+    return this.products.get$;
+  }
 
   increment() {
     this.counter++;
