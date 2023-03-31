@@ -2,6 +2,7 @@ export type ProductDto = {
   brand: string;
   caption: string;
   navigateUrl: string;
+  id: number;
 };
 
 export type ProductsRespose = {
@@ -10,4 +11,20 @@ export type ProductsRespose = {
     totalPages: number;
     totalCount: number;
   };
+};
+
+export type FilterDto = {
+  id: string;
+  type: string;
+  name: string;
+};
+
+export type FiltersResponse = {
+  data: FilterDto[];
+};
+
+export type FiltersQuery = {
+  page: number;
+  pageSize: number;
+  status: string;
 };

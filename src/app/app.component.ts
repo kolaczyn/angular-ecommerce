@@ -1,5 +1,13 @@
 import { Component } from '@angular/core';
-import { BehaviorSubject, mergeMap, switchMap } from 'rxjs';
+import {
+  BehaviorSubject,
+  combineLatest,
+  map,
+  merge,
+  mergeMap,
+  switchMap,
+} from 'rxjs';
+import { ProductDto } from 'src/types';
 import { ProductsService } from './services/products.service';
 
 @Component({
@@ -8,11 +16,17 @@ import { ProductsService } from './services/products.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
+  constructor(private productService: ProductsService) {}
+
   title = 'product-filters';
   private page = new BehaviorSubject(1);
+
   page$ = this.page.asObservable();
   private pageSize = new BehaviorSubject<12 | 24 | 36>(12);
   pageSize$ = this.pageSize.asObservable();
+
+  private status = new BehaviorSubject<null | string>(null);
+  status$ = this.status.asObservable();
 
   setPage(page: number) {
     this.page.next(page);
@@ -22,17 +36,28 @@ export class AppComponent {
     this.pageSize.next(pageSize);
   }
 
+  setStatus(status: null | string) {
+    this.status.next(status);
+  }
+
   isActivePage(page: number) {
     return this.page.value === page;
   }
 
-  constructor(private products: ProductsService) {}
+  getProductId(_idx: number, product: ProductDto) {
+    return product.id;
+  }
 
-  getProducts$ = this.page$.pipe(
-    mergeMap((page) =>
-      this.pageSize$.pipe(
-        switchMap((pageSize) => this.products.getProducts$(page, pageSize))
-      )
+  filters$ = this.productService.getFilters$();
+
+  products$ = combineLatest([this.page$, this.pageSize$, this.status$]).pipe(
+    map(([page, pageSize, status]) => ({
+      page,
+      pageSize,
+      status,
+    })),
+    switchMap(({ page, pageSize, status }) =>
+      this.productService.getProducts$({ page, pageSize, status: status ?? '' })
     )
   );
 }

@@ -1,4 +1,4 @@
-<nav>Hello World</nav>
+<h2>Page</h2>
 <div>
   <button [class]="isActivePage(1) ? 'is-active': ''" (click)="setPage(1)">1</button>
   <button [class]="isActivePage(2) ? 'is-active': ''" (click)="setPage(2)">2</button>
@@ -6,14 +6,26 @@
   <button [class]="isActivePage(4) ? 'is-active': ''" (click)="setPage(4)">4</button>
 </div>
 <div>Current Page: {{ page$ | async }}</div>
+
+<h2>Page Size</h2>
 <div>
   <button (click)="setPageSize(12)">12</button>
   <button (click)="setPageSize(24)">24</button>
   <button (click)="setPageSize(36)">36</button>
 </div>
 <div>Current PageSize: {{pageSize$ | async}}</div>
-<div *ngIf="getProducts$ | async as products">
-  <app-product-tile *ngFor="let product of products" [product]="product" />
+
+<h2>Statuses</h2>
+<div *ngIf="filters$ | async as filters">
+  <div *ngFor="let filter of filters">
+    <button (click)="setStatus(filter.id)">{{filter.name}}</button>
+</div>
+<div>Selected Status: {{status$ | async}}</div>
+
+
+<h2>Products</h2>
+<div *ngIf="products$ | async as products">
+  <app-product-tile *ngFor="let product of products; trackBy:getProductId" [product]="product" />
 </div>
 
 <router-outlet></router-outlet>
