@@ -1,6 +1,6 @@
 <nav>Hello World</nav>
 <button (click)="increment()">{{ counter }}</button>
-<div *ngIf="products$ | async as products">
+<div *ngIf="getProducts$ | async as products">
   <li *ngFor="let product of products">
     {{ product.navigateUrl }}
   </li>

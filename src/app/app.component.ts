@@ -12,9 +12,7 @@ export class AppComponent {
 
   constructor(private products: ProductsService) {}
 
-  get products$() {
-    return this.products.get$;
-  }
+  getProducts$ = this.products.getProducts$(1, 10);
 
   increment() {
     this.counter++;
