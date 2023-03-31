@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
-import { BehaviorSubject, combineLatest, map, switchMap } from 'rxjs';
+import {
+  BehaviorSubject,
+  combineLatest,
+  distinctUntilChanged,
+  map,
+  switchMap,
+} from 'rxjs';
 import { ProductDto } from 'src/types';
 import { ProductsService } from './services/products.service';
 
@@ -62,6 +68,7 @@ export class AppComponent {
       pageSize,
       status,
     })),
+    distinctUntilChanged((a, b) => JSON.stringify(a) === JSON.stringify(b)),
     switchMap(({ page, pageSize, status }) =>
       this.productService.getProducts$({ page, pageSize, status: status ?? '' })
     )
