@@ -22,6 +22,10 @@ export class AppComponent {
     this.pageSize.next(pageSize);
   }
 
+  isActivePage(page: number) {
+    return this.page.value === page;
+  }
+
   constructor(private products: ProductsService) {}
 
   getProducts$ = this.page$.pipe(
