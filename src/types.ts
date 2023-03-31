@@ -13,14 +13,14 @@ export type ProductsRespose = {
   };
 };
 
-export type FilterDto = {
+export type ProductStatusDto = {
   id: string;
   type: string;
   name: string;
 };
 
 export type FiltersResponse = {
-  data: FilterDto[];
+  data: ProductStatusDto[];
 };
 
 export type FiltersQuery = {

@@ -1,24 +1,19 @@
 <h2>Page</h2>
 <div>
-  <button [class]="isActivePage(1) ? 'is-active': ''" (click)="setPage(1)">1</button>
-  <button [class]="isActivePage(2) ? 'is-active': ''" (click)="setPage(2)">2</button>
-  <button [class]="isActivePage(3) ? 'is-active': ''" (click)="setPage(3)">3</button>
-  <button [class]="isActivePage(4) ? 'is-active': ''" (click)="setPage(4)">4</button>
+    <button *ngFor="let p of pageOptions" [class]="isActivePage(p) ? 'is-active': ''" (click)="setPage(p)">{{p}}</button>
 </div>
 <div>Current Page: {{ page$ | async }}</div>
 
 <h2>Page Size</h2>
 <div>
-  <button (click)="setPageSize(12)">12</button>
-  <button (click)="setPageSize(24)">24</button>
-  <button (click)="setPageSize(36)">36</button>
+  <button *ngFor="let ps of pageSizeOptions" [class]="isActivePageSize(ps) ? 'is-active': ''" (click)="setPageSize(ps)">{{ps}}</button>
 </div>
 <div>Current PageSize: {{pageSize$ | async}}</div>
 
 <h2>Statuses</h2>
 <div *ngIf="filters$ | async as filters">
-  <div *ngFor="let filter of filters">
-    <button (click)="setStatus(filter.id)">{{filter.name}}</button>
+  <div *ngFor="let f of filters">
+    <button [class]="{'is-active': isActiveStatus(f.id)}" (click)="setStatus(f.id)">{{f.name}}</button>
 </div>
 <div>Selected Status: {{status$ | async}}</div>
 

@@ -1,12 +1,5 @@
 import { Component } from '@angular/core';
-import {
-  BehaviorSubject,
-  combineLatest,
-  map,
-  merge,
-  mergeMap,
-  switchMap,
-} from 'rxjs';
+import { BehaviorSubject, combineLatest, map, switchMap } from 'rxjs';
 import { ProductDto } from 'src/types';
 import { ProductsService } from './services/products.service';
 
@@ -44,11 +37,23 @@ export class AppComponent {
     return this.page.value === page;
   }
 
+  isActivePageSize(pageSize: number) {
+    console.log(this.pageSize.value, pageSize);
+    return this.pageSize.value === pageSize;
+  }
+
+  isActiveStatus(status: null | string) {
+    return this.status.value === status;
+  }
+
   getProductId(_idx: number, product: ProductDto) {
     return product.id;
   }
 
   filters$ = this.productService.getFilters$();
+
+  pageOptions = [1, 2, 3, 4] as const;
+  pageSizeOptions = [12, 24, 36] as const;
 
   products$ = combineLatest([this.page$, this.pageSize$, this.status$]).pipe(
     map(([page, pageSize, status]) => ({
