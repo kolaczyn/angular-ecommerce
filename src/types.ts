@@ -1,4 +1,4 @@
-type ProductDto = {
+export type ProductDto = {
   brand: string;
   caption: string;
   navigateUrl: string;
