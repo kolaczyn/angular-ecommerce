@@ -29,8 +29,9 @@ export class AppComponent {
     this.pageSize.next(pageSize);
   }
 
-  setStatus(status: null | string) {
-    this.status.next(status);
+  setStatus(statusId: string) {
+    const nextStatus = this.isActiveStatus(statusId) ? null : statusId;
+    this.status.next(nextStatus);
   }
 
   isActivePage(page: number) {
