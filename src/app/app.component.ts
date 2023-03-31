@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BehaviorSubject, switchMap } from 'rxjs';
+import { BehaviorSubject, mergeMap, switchMap } from 'rxjs';
 import { ProductsService } from './services/products.service';
 
 @Component({
@@ -9,16 +9,26 @@ import { ProductsService } from './services/products.service';
 })
 export class AppComponent {
   title = 'product-filters';
-  private currentPage = new BehaviorSubject(1);
-  page$ = this.currentPage.asObservable();
+  private page = new BehaviorSubject(1);
+  page$ = this.page.asObservable();
+  private pageSize = new BehaviorSubject<12 | 24 | 36>(12);
+  pageSize$ = this.pageSize.asObservable();
 
   setPage(page: number) {
-    this.currentPage.next(page);
+    this.page.next(page);
+  }
+
+  setPageSize(pageSize: 12 | 24 | 36) {
+    this.pageSize.next(pageSize);
   }
 
   constructor(private products: ProductsService) {}
 
   getProducts$ = this.page$.pipe(
-    switchMap((page) => this.products.getProducts$(page, 10))
+    mergeMap((page) =>
+      this.pageSize$.pipe(
+        switchMap((pageSize) => this.products.getProducts$(page, pageSize))
+      )
+    )
   );
 }
