@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { BehaviorSubject, switchMap } from 'rxjs';
 import { ProductsService } from './services/products.service';
 
 @Component({
@@ -8,13 +9,16 @@ import { ProductsService } from './services/products.service';
 })
 export class AppComponent {
   title = 'product-filters';
-  counter = 0;
+  private currentPage = new BehaviorSubject(1);
+  page$ = this.currentPage.asObservable();
+
+  setPage(page: number) {
+    this.currentPage.next(page);
+  }
 
   constructor(private products: ProductsService) {}
 
-  getProducts$ = this.products.getProducts$(1, 10);
-
-  increment() {
-    this.counter++;
-  }
+  getProducts$ = this.page$.pipe(
+    switchMap((page) => this.products.getProducts$(page, 10))
+  );
 }
