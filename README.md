@@ -1,9 +1,12 @@
 ## TODO
 
 - [ ] - make the filters page prettier
-- [ ] - add search
+- [x] - add search
 - [ ] - organize file structure
 - [ ] - shopping cart
-- [ ] - proper pagination (show page from 1 to max number of pages)
+- [x] - proper pagination (show page from 1 to max number of pages)
 - [ ] - NGRX
-- [ ] - do something with reactive forms
+- [x] - do something with reactive forms
+- [ ] - add ci (formatting, linting, building, tests)
+- [ ] - e2e components tests with Cypress
+- [ ] - rxjs tests
