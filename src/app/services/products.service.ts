@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 import { FiltersQuery, FiltersResponse, ProductsRespose } from 'src/types';
 
-const PRODUCTS_URL = 'https://v5stg.rossmann.pl/products/v2/api/Products';
+const PRODUCTS_URL = 'https://www.rossmann.pl/products/v2/api/Products';
 
 @Injectable({
   providedIn: 'root',

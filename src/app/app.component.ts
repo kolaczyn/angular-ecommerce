@@ -27,6 +27,14 @@ export class AppComponent {
   private status = new BehaviorSubject<null | string>(null);
   status$ = this.status.asObservable();
 
+  getPage() {
+    return this.page.value;
+  }
+
+  getPageSize() {
+    return this.pageSize.value;
+  }
+
   setPage(page: number) {
     this.page.next(page);
   }

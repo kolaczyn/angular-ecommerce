@@ -10,6 +10,6 @@ export class ProductTileComponent {
   @Input() product!: ProductDto;
 
   get href() {
-    return `https://v5stg.rossmann.pl/${this.product.navigateUrl}`;
+    return `https://www.rossmann.pl/${this.product.navigateUrl}`;
   }
 }
