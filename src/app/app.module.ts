@@ -12,6 +12,7 @@ import { ProductTileComponent } from './components/product-tile/product-tile.com
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FiltersComponent } from './filters/filters.component';
 import { LayoutComponent } from './components/layout/layout.component';
+import { AboutComponent } from './components/about/about.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { LayoutComponent } from './components/layout/layout.component';
     ProductTileComponent,
     FiltersComponent,
     LayoutComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,
