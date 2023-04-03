@@ -45,7 +45,6 @@ export class AppComponent {
   }
 
   isActivePageSize(pageSize: number) {
-    console.log(this.pageSize.value, pageSize);
     return this.pageSize.value === pageSize;
   }
 

@@ -1,26 +1,49 @@
 <h2>Page</h2>
 <div>
-    <button *ngFor="let p of pageOptions" [class]="isActivePage(p) ? 'is-active': ''" (click)="setPage(p)">{{p}}</button>
+  <button
+    mat-raised-button
+    [disabled]="isActivePage(p)"
+    *ngFor="let p of pageOptions"
+    (click)="setPage(p)"
+  >
+    {{ p }}
+  </button>
 </div>
 <div>Current Page: {{ page$ | async }}</div>
 
 <h2>Page Size</h2>
 <div>
-  <button *ngFor="let ps of pageSizeOptions" [class]="isActivePageSize(ps) ? 'is-active': ''" (click)="setPageSize(ps)">{{ps}}</button>
+  <button
+    mat-raised-button
+    [disabled]="isActivePageSize(ps)"
+    *ngFor="let ps of pageSizeOptions"
+    (click)="setPageSize(ps)"
+  >
+    {{ ps }}
+  </button>
 </div>
-<div>Current PageSize: {{pageSize$ | async}}</div>
+<div>Current PageSize: {{ pageSize$ | async }}</div>
 
 <h2>Statuses</h2>
 <div *ngIf="filters$ | async as filters">
   <div *ngFor="let f of filters">
-    <button [class]="{'is-active': isActiveStatus(f.id)}" (click)="setStatus(f.id)">{{f.name}}</button>
+    <button
+      mat-raised-button
+      [disabled]="isActiveStatus(f.id)"
+      (click)="setStatus(f.id)"
+    >
+      {{ f.name }}
+    </button>
+  </div>
+  <div>Selected Status: {{ status$ | async }}</div>
+
+  <h2>Products</h2>
+  <div *ngIf="products$ | async as products">
+    <app-product-tile
+      *ngFor="let product of products; trackBy: getProductId"
+      [product]="product"
+    ></app-product-tile>
+  </div>
+
+  <router-outlet></router-outlet>
 </div>
-<div>Selected Status: {{status$ | async}}</div>
-
-
-<h2>Products</h2>
-<div *ngIf="products$ | async as products">
-  <app-product-tile *ngFor="let product of products; trackBy:getProductId" [product]="product" />
-</div>
-
-<router-outlet></router-outlet>
