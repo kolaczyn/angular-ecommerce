@@ -5,12 +5,16 @@ export type ProductDto = {
   id: number;
 };
 
-export type ProductsRespose = {
+export type ProductsListResponse = {
   data: {
     products: ProductDto[];
     totalPages: number;
     totalCount: number;
   };
+};
+
+export type ProductResponse = {
+  data: ProductDto;
 };
 
 export type ProductStatusDto = {

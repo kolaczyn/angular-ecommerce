@@ -1,7 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
-import { FiltersQuery, FiltersResponse, ProductsRespose } from 'src/types';
+import {
+  FiltersQuery,
+  FiltersResponse,
+  ProductResponse,
+  ProductsListResponse,
+} from 'src/types';
 
 const PRODUCTS_URL = 'https://www.rossmann.pl/products/v2/api/Products';
 
@@ -13,12 +18,18 @@ export class ProductsService {
 
   getProducts$({ page, pageSize, status }: FiltersQuery) {
     return this.http
-      .get<ProductsRespose>(
+      .get<ProductsListResponse>(
         `${PRODUCTS_URL}?Page=${page}&PageSize=${pageSize}&Statuses=${
           status ?? ''
         }`
       )
       .pipe(map((x) => x.data.products));
+  }
+
+  getProduct$(id: string) {
+    return this.http
+      .get<ProductResponse>(`${PRODUCTS_URL}/${id}`)
+      .pipe(map((x) => x.data));
   }
 
   getFilters$() {
