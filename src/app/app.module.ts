@@ -10,6 +10,7 @@ import { FiltersComponent } from './filters/filters.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { AboutComponent } from './components/about/about.component';
 import { MaterialModule } from './modules/material/material.module';
+import { ProductPageComponent } from './components/product-page/product-page.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { MaterialModule } from './modules/material/material.module';
     FiltersComponent,
     LayoutComponent,
     AboutComponent,
+    ProductPageComponent,
   ],
   imports: [
     BrowserModule,
