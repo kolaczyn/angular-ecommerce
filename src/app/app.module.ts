@@ -9,9 +9,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProductTileComponent } from './components/product-tile/product-tile.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FiltersComponent } from './filters/filters.component';
 
 @NgModule({
-  declarations: [AppComponent, ProductTileComponent],
+  declarations: [AppComponent, ProductTileComponent, FiltersComponent],
   imports: [
     BrowserModule,
     HttpClientModule,

@@ -1,0 +1,46 @@
+<h2>Page</h2>
+<div>
+  <button
+    mat-raised-button
+    [disabled]="isActivePage(p)"
+    *ngFor="let p of pageOptions"
+    (click)="setPage(p)"
+  >
+    {{ p }}
+  </button>
+</div>
+<div>Current Page: {{ page$ | async }}</div>
+
+<h2>Page Size</h2>
+<mat-form-field appearance="fill">
+  <mat-label>Page Size</mat-label>
+  <mat-select [value]="getPageSize()">
+    <mat-option
+      *ngFor="let ps of pageSizeOptions"
+      [value]="ps"
+      (click)="setPageSize(ps)"
+      >{{ ps }}</mat-option
+    >
+  </mat-select>
+</mat-form-field>
+
+<h2>Statuses</h2>
+<div *ngIf="filters$ | async as filters">
+  <div *ngFor="let f of filters">
+    <button
+      mat-raised-button
+      [color]="isActiveStatus(f.id) ? 'primary' : ''"
+      (click)="setStatus(f.id)"
+    >
+      {{ f.name }}
+    </button>
+  </div>
+
+  <h2>Products</h2>
+  <div *ngIf="products$ | async as products">
+    <app-product-tile
+      *ngFor="let product of products; trackBy: getProductId"
+      [product]="product"
+    ></app-product-tile>
+  </div>
+</div>
