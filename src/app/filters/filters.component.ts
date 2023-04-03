@@ -85,6 +85,7 @@ export class FiltersComponent {
         page,
         pageSize,
         status: status ?? '',
+        search: '',
       })
     ),
     shareReplay()

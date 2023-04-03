@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { UrlSerializer } from '@angular/router';
 import { map, shareReplay } from 'rxjs';
 import {
   FiltersQuery,
@@ -16,13 +17,10 @@ const PRODUCTS_URL = 'https://www.rossmann.pl/products/v2/api/Products';
 export class ProductsService {
   constructor(private http: HttpClient) {}
 
-  getProductList({ page, pageSize, status }: FiltersQuery) {
+  getProductList(params: FiltersQuery) {
+    const queryString = new HttpParams({ fromObject: params });
     return this.http
-      .get<ProductsListResponse>(
-        `${PRODUCTS_URL}?Page=${page}&PageSize=${pageSize}&Statuses=${
-          status ?? ''
-        }`
-      )
+      .get<ProductsListResponse>(`${PRODUCTS_URL}?${queryString.toString()}}`)
       .pipe(
         map((x) => x.data),
         shareReplay()

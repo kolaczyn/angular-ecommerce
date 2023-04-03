@@ -31,4 +31,5 @@ export type FiltersQuery = {
   page: number;
   pageSize: number;
   status: string;
+  search: string;
 };
