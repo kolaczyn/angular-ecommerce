@@ -17,43 +17,42 @@ import { ProductsService } from '../services/products.service';
 export class FiltersComponent {
   constructor(private productService: ProductsService) {}
 
-  title = 'product-filters';
   private page = new BehaviorSubject(1);
-
   page$ = this.page.asObservable();
-  private pageSize = new BehaviorSubject<12 | 24 | 36>(12);
-  pageSize$ = this.pageSize.asObservable();
-
-  private status = new BehaviorSubject<null | string>(null);
-  status$ = this.status.asObservable();
 
   getPage() {
     return this.page.value;
-  }
-
-  getPageSize() {
-    return this.pageSize.value;
   }
 
   setPage(page: number) {
     this.page.next(page);
   }
 
-  setPageSize(pageSize: 12 | 24 | 36) {
-    this.pageSize.next(pageSize);
-  }
-
-  setStatus(statusId: string) {
-    const nextStatus = this.isActiveStatus(statusId) ? null : statusId;
-    this.status.next(nextStatus);
-  }
-
   isActivePage(page: number) {
     return this.page.value === page;
   }
 
+  private pageSize = new BehaviorSubject<12 | 24 | 36>(12);
+  pageSize$ = this.pageSize.asObservable();
+
+  getPageSize() {
+    return this.pageSize.value;
+  }
+
+  setPageSize(pageSize: 12 | 24 | 36) {
+    this.pageSize.next(pageSize);
+  }
+
   isActivePageSize(pageSize: number) {
     return this.pageSize.value === pageSize;
+  }
+
+  private status = new BehaviorSubject<null | string>(null);
+  status$ = this.status.asObservable();
+
+  setStatus(statusId: string) {
+    const nextStatus = this.isActiveStatus(statusId) ? null : statusId;
+    this.status.next(nextStatus);
   }
 
   isActiveStatus(status: null | string) {
