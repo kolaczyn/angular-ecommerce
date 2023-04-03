@@ -11,6 +11,7 @@ import { LayoutComponent } from './components/layout/layout.component';
 import { AboutComponent } from './components/about/about.component';
 import { MaterialModule } from './modules/material/material.module';
 import { ProductPageComponent } from './components/product-page/product-page.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { ProductPageComponent } from './components/product-page/product-page.com
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,

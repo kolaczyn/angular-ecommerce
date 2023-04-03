@@ -2,13 +2,17 @@ import { Component } from '@angular/core';
 import {
   BehaviorSubject,
   combineLatest,
+  debounce,
+  debounceTime,
   distinctUntilChanged,
   map,
   shareReplay,
+  startWith,
   switchMap,
 } from 'rxjs';
 import { ProductDto } from 'src/types';
 import { ProductsService } from '../services/products.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-filters',
@@ -17,6 +21,13 @@ import { ProductsService } from '../services/products.service';
 })
 export class FiltersComponent {
   constructor(private productService: ProductsService) {}
+
+  searchControl = new FormControl('', { nonNullable: true });
+
+  search$ = this.searchControl.valueChanges.pipe(
+    debounceTime(125),
+    startWith('')
+  );
 
   private page = new BehaviorSubject(1);
   page$ = this.page.asObservable();
@@ -73,19 +84,21 @@ export class FiltersComponent {
     this.page$,
     this.pageSize$,
     this.status$,
+    this.search$,
   ]).pipe(
-    map(([page, pageSize, status]) => ({
+    map(([page, pageSize, status, search]) => ({
       page,
       pageSize,
       status,
+      search,
     })),
     distinctUntilChanged((a, b) => JSON.stringify(a) === JSON.stringify(b)),
-    switchMap(({ page, pageSize, status }) =>
+    switchMap(({ page, pageSize, status, search }) =>
       this.productService.getProductList({
         page,
         pageSize,
         status: status ?? '',
-        search: '',
+        search,
       })
     ),
     shareReplay()

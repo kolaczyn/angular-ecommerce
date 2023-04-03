@@ -16,6 +16,11 @@
   <div>
     <h2>Products</h2>
 
+    <mat-form-field>
+      <mat-label>Search</mat-label>
+      <input [formControl]="searchControl" matInput type="text" />
+    </mat-form-field>
+
     <mat-form-field appearance="fill">
       <mat-label>Page Size</mat-label>
       <mat-select [value]="getPageSize()">

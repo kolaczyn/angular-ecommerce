@@ -1,6 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { UrlSerializer } from '@angular/router';
 import { map, shareReplay } from 'rxjs';
 import {
   FiltersQuery,
