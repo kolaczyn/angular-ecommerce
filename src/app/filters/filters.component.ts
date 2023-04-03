@@ -107,4 +107,12 @@ export class FiltersComponent {
     // TODO fix to make it work if e.g. total pages is 3
     map(({ totalPages }) => [1, 2, totalPages - 1, totalPages])
   );
+
+  addToCart(id: number) {
+    alert(`adding to cart ${id}`);
+    return;
+  }
+  isInCart(_id: number) {
+    return false;
+  }
 }

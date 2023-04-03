@@ -46,6 +46,8 @@
       <app-product-tile
         *ngFor="let product of resp.products; trackBy: getProductId"
         [product]="product"
+        [isInCart]="isInCart(product.id)"
+        (addToCart)="addToCart(product.id)"
       ></app-product-tile>
     </div>
   </div>

@@ -1,6 +1,10 @@
-<a [routerLink]="href">
-  <div>
-    {{ product.brand }}
-    {{ product.caption }}
-  </div>
-</a>
+<div>
+  <a [routerLink]="href">
+    <div>
+      {{ product.brand }}
+      {{ product.caption }}
+    </div>
+  </a>
+  <button (click)="addToCart.emit()" mat-button>Add to cart</button>
+  <hr />
+</div>

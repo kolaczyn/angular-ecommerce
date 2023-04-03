@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { filter, map, switchMap } from 'rxjs/operators';
 import { ProductsService } from 'src/app/services/products.service';
+import { isNotNull } from 'src/app/utils/isNotNull';
 
 @Component({
   selector: 'app-product-page',
@@ -16,7 +17,7 @@ export class ProductPageComponent {
 
   id$ = this.router.paramMap.pipe(map((params) => params.get('id')));
   product$ = this.id$.pipe(
-    filter((x) => x !== null),
-    switchMap((id) => this.productsService.getProduct(id!))
+    filter(isNotNull),
+    switchMap((id) => this.productsService.getProduct(id))
   );
 }
