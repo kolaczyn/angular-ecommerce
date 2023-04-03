@@ -17,6 +17,6 @@ export class ProductPageComponent {
   id$ = this.router.paramMap.pipe(map((params) => params.get('id')));
   product$ = this.id$.pipe(
     filter((x) => x !== null),
-    switchMap((id) => this.productsService.getProduct$(id!))
+    switchMap((id) => this.productsService.getProduct(id!))
   );
 }

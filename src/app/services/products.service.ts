@@ -16,23 +16,23 @@ const PRODUCTS_URL = 'https://www.rossmann.pl/products/v2/api/Products';
 export class ProductsService {
   constructor(private http: HttpClient) {}
 
-  getProducts$({ page, pageSize, status }: FiltersQuery) {
+  getProductList({ page, pageSize, status }: FiltersQuery) {
     return this.http
       .get<ProductsListResponse>(
         `${PRODUCTS_URL}?Page=${page}&PageSize=${pageSize}&Statuses=${
           status ?? ''
         }`
       )
-      .pipe(map((x) => x.data.products));
+      .pipe(map((x) => x.data));
   }
 
-  getProduct$(id: string) {
+  getProduct(id: string) {
     return this.http
       .get<ProductResponse>(`${PRODUCTS_URL}/${id}`)
       .pipe(map((x) => x.data));
   }
 
-  getFilters$() {
+  getFilters() {
     return this.http
       .get<FiltersResponse>(`${PRODUCTS_URL}/filters`)
       .pipe(map((x) => x.data));

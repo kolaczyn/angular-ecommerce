@@ -16,14 +16,6 @@
   <div>
     <h2>Products</h2>
 
-    <button
-      mat-raised-button
-      [disabled]="isActivePage(p)"
-      *ngFor="let p of pageOptions"
-      (click)="setPage(p)"
-    >
-      {{ p }}
-    </button>
     <mat-form-field appearance="fill">
       <mat-label>Page Size</mat-label>
       <mat-select [value]="getPageSize()">
@@ -35,9 +27,19 @@
         >
       </mat-select>
     </mat-form-field>
-    <div *ngIf="products$ | async as products">
+    <div *ngIf="pagesToShow$ | async as pagesToShow">
+      <button
+        mat-raised-button
+        [disabled]="isActivePage(p)"
+        *ngFor="let p of pagesToShow"
+        (click)="setPage(p)"
+      >
+        {{ p }}
+      </button>
+    </div>
+    <div *ngIf="productsResponse$ | async as resp">
       <app-product-tile
-        *ngFor="let product of products; trackBy: getProductId"
+        *ngFor="let product of resp.products; trackBy: getProductId"
         [product]="product"
       ></app-product-tile>
     </div>

@@ -63,12 +63,16 @@ export class FiltersComponent {
     return product.id;
   }
 
-  filters$ = this.productService.getFilters$();
+  filters$ = this.productService.getFilters();
 
   pageOptions = [1, 2, 3, 4] as const;
   pageSizeOptions = [12, 24, 36] as const;
 
-  products$ = combineLatest([this.page$, this.pageSize$, this.status$]).pipe(
+  productsResponse$ = combineLatest([
+    this.page$,
+    this.pageSize$,
+    this.status$,
+  ]).pipe(
     map(([page, pageSize, status]) => ({
       page,
       pageSize,
@@ -76,7 +80,16 @@ export class FiltersComponent {
     })),
     distinctUntilChanged((a, b) => JSON.stringify(a) === JSON.stringify(b)),
     switchMap(({ page, pageSize, status }) =>
-      this.productService.getProducts$({ page, pageSize, status: status ?? '' })
+      this.productService.getProductList({
+        page,
+        pageSize,
+        status: status ?? '',
+      })
     )
+  );
+
+  pagesToShow$ = this.productsResponse$.pipe(
+    // TODO fix to make it work if e.g. total pages is 3
+    map(({ totalPages }) => [1, 2, totalPages - 1, totalPages])
   );
 }
