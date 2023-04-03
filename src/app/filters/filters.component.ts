@@ -4,6 +4,7 @@ import {
   combineLatest,
   distinctUntilChanged,
   map,
+  shareReplay,
   switchMap,
 } from 'rxjs';
 import { ProductDto } from 'src/types';
@@ -85,7 +86,8 @@ export class FiltersComponent {
         pageSize,
         status: status ?? '',
       })
-    )
+    ),
+    shareReplay()
   );
 
   pagesToShow$ = this.productsResponse$.pipe(

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
+import { map, shareReplay } from 'rxjs';
 import {
   FiltersQuery,
   FiltersResponse,
@@ -23,18 +23,23 @@ export class ProductsService {
           status ?? ''
         }`
       )
-      .pipe(map((x) => x.data));
+      .pipe(
+        map((x) => x.data),
+        shareReplay()
+      );
   }
 
   getProduct(id: string) {
-    return this.http
-      .get<ProductResponse>(`${PRODUCTS_URL}/${id}`)
-      .pipe(map((x) => x.data));
+    return this.http.get<ProductResponse>(`${PRODUCTS_URL}/${id}`).pipe(
+      map((x) => x.data),
+      shareReplay()
+    );
   }
 
   getFilters() {
-    return this.http
-      .get<FiltersResponse>(`${PRODUCTS_URL}/filters`)
-      .pipe(map((x) => x.data));
+    return this.http.get<FiltersResponse>(`${PRODUCTS_URL}/filters`).pipe(
+      map((x) => x.data),
+      shareReplay()
+    );
   }
 }

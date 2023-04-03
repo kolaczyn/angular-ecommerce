@@ -27,16 +27,16 @@
         >
       </mat-select>
     </mat-form-field>
-    <div *ngIf="pagesToShow$ | async as pagesToShow">
-      <button
-        mat-raised-button
-        [disabled]="isActivePage(p)"
-        *ngFor="let p of pagesToShow"
-        (click)="setPage(p)"
-      >
-        {{ p }}
-      </button>
-    </div>
+
+    <button
+      mat-raised-button
+      [disabled]="isActivePage(p)"
+      *ngFor="let p of pagesToShow$ | async"
+      (click)="setPage(p)"
+    >
+      {{ p }}
+    </button>
+
     <div *ngIf="productsResponse$ | async as resp">
       <app-product-tile
         *ngFor="let product of resp.products; trackBy: getProductId"
