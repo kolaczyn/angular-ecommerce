@@ -5,6 +5,8 @@
       {{ product.caption }}
     </div>
   </a>
-  <button (click)="addToCart.emit()" mat-button>Add to cart</button>
+  <button (click)="addToCart.emit()" mat-button>
+    {{ isInCart ? "Add to cart" : "remove from cart" }}
+  </button>
   <hr />
 </div>

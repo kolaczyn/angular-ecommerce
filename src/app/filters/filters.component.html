@@ -41,6 +41,9 @@
     >
       {{ p }}
     </button>
+    --------------
+    <div>{{ getCart() }}</div>
+    --------------
 
     <div *ngIf="productsResponse$ | async as resp">
       <app-product-tile

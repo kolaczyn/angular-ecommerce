@@ -12,6 +12,7 @@ import {
 import { ProductDto } from 'src/types';
 import { ProductsService } from '../services/products.service';
 import { FormControl } from '@angular/forms';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-filters',
@@ -19,7 +20,10 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./filters.component.css'],
 })
 export class FiltersComponent {
-  constructor(private productService: ProductsService) {}
+  constructor(
+    private productService: ProductsService,
+    private cartService: CartService
+  ) {}
 
   searchControl = new FormControl('', { nonNullable: true });
 
@@ -109,10 +113,14 @@ export class FiltersComponent {
   );
 
   addToCart(id: number) {
-    alert(`adding to cart ${id}`);
-    return;
+    this.cartService.addToCart({ id, quantity: 1 });
   }
-  isInCart(_id: number) {
-    return false;
+
+  isInCart(id: number) {
+    return this.cartService.isInCart(id);
+  }
+
+  getCart() {
+    return this.cartService.getCart();
   }
 }
