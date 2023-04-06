@@ -6,8 +6,13 @@ import { isNotNull } from 'src/app/utils/isNotNull';
 
 @Component({
   selector: 'app-product-page',
-  templateUrl: './product-page.component.html',
-  styles: [],
+  template: `
+    <p>product-page works!</p>
+    <div>{{ id$ | async }}</div>
+    <div *ngIf="product$ | async as product">
+      {{ product.brand }} {{ product.caption }}
+    </div>
+  `,
 })
 export class ProductPageComponent {
   constructor(
