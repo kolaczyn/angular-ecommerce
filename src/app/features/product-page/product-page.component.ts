@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { filter, map, switchMap } from 'rxjs/operators';
-import { ProductsService } from 'src/app/services/products.service';
-import { isNotNull } from 'src/app/utils/isNotNull';
+import { ProductsService } from 'src/app/shared/products.service';
+import { isNotNull } from 'src/app/shared/isNotNull';
 
 @Component({
   selector: 'app-product-page',

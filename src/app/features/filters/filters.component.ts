@@ -10,7 +10,7 @@ import {
   switchMap,
 } from 'rxjs';
 import { ProductDto } from 'src/types';
-import { ProductsService } from '../services/products.service';
+import { ProductsService } from '../../shared/products.service';
 import { FormControl } from '@angular/forms';
 
 @Component({

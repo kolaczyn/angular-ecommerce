@@ -4,13 +4,13 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ProductTileComponent } from './components/product-tile/product-tile.component';
+import { ProductTileComponent } from './features/filters/components/product-tile.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FiltersComponent } from './filters/filters.component';
-import { LayoutComponent } from './components/layout/layout.component';
-import { AboutComponent } from './components/about/about.component';
-import { MaterialModule } from './modules/material/material.module';
-import { ProductPageComponent } from './components/product-page/product-page.component';
+import { FiltersComponent } from './features/filters/filters.component';
+import { LayoutComponent } from './shared/layout/layout.component';
+import { AboutComponent } from './features/about/about.component';
+import { MaterialModule } from './shared/material.module';
+import { ProductPageComponent } from './features/product-page/product-page.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
