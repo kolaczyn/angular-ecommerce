@@ -1,12 +1,12 @@
 <div class="split">
   <div>
     <h2>Statuses</h2>
-    <div *ngIf="filters$ | async as filters">
+    <div *ngIf="filtersService.filters$ | async as filters">
       <div *ngFor="let f of filters">
         <button
           mat-raised-button
-          [color]="isActiveStatus(f.id) ? 'primary' : ''"
-          (click)="setStatus(f.id)"
+          [color]="filtersService.isActiveStatus(f.id) ? 'primary' : ''"
+          (click)="filtersService.setStatus(f.id)"
         >
           {{ f.name }}
         </button>
@@ -18,16 +18,20 @@
 
     <mat-form-field>
       <mat-label>Search</mat-label>
-      <input [formControl]="searchControl" matInput type="text" />
+      <input
+        [formControl]="filtersService.searchControl"
+        matInput
+        type="text"
+      />
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Page Size</mat-label>
-      <mat-select [value]="getPageSize()">
+      <mat-select [value]="filtersService.getPageSize()">
         <mat-option
-          *ngFor="let ps of pageSizeOptions"
+          *ngFor="let ps of filtersService.pageSizeOptions"
           [value]="ps"
-          (click)="setPageSize(ps)"
+          (click)="filtersService.setPageSize(ps)"
           >{{ ps }}</mat-option
         >
       </mat-select>
@@ -35,16 +39,16 @@
 
     <button
       mat-raised-button
-      [disabled]="isActivePage(p)"
-      *ngFor="let p of pagesToShow$ | async"
-      (click)="setPage(p)"
+      [disabled]="filtersService.isActivePage(p)"
+      *ngFor="let p of filtersService.pagesToShow$ | async"
+      (click)="filtersService.setPage(p)"
     >
       {{ p }}
     </button>
 
-    <div *ngIf="productsResponse$ | async as resp">
+    <div *ngIf="filtersService.productsResponse$ | async as resp">
       <app-product-tile
-        *ngFor="let product of resp.products; trackBy: getProductId"
+        *ngFor="let product of resp.products; trackBy: getById"
         [product]="product"
         [isInCart]="isInCart(product.id)"
         (addToCart)="addToCart(product.id)"
