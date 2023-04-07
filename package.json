@@ -9,6 +9,7 @@
     "e2e:open": "cypress open",
     "e2e:run": "cypress run --component",
     "test": "ng test",
+    "test:run": "ng test --browsers=ChromeHeadless --watch=false",
     "format": "prettier -c ./src/**/*.{ts,html}",
     "lint": "ng lint",
     "lint:all": "run-p -cl format lint"
