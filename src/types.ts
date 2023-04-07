@@ -33,3 +33,7 @@ export type FiltersQuery = {
   status: string;
   search: string;
 };
+
+export type CartItem = ProductDto & {
+  quantity: number;
+};

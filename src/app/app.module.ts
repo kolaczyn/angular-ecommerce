@@ -13,6 +13,7 @@ import { MaterialModule } from './shared/material.module';
 import { ProductPageComponent } from './features/product-page/product-page.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CounterComponent } from './features/about/counter/counter.component';
+import { CartPageModule } from './features/cart-page/cart-page.module';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { CounterComponent } from './features/about/counter/counter.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
+    CartPageModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
