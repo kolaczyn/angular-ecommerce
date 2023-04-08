@@ -1,0 +1,19 @@
+{
+  "$schema": "db.schema.json",
+  "users": [
+    {
+      "id": 1,
+      "username": "username",
+      "password": "password",
+      "email": "email@example.com",
+      "sendNewsletter": false
+    },
+    {
+      "email": "",
+      "password": "password",
+      "username": "username",
+      "sendNewsletter": false,
+      "id": 2
+    }
+  ]
+}

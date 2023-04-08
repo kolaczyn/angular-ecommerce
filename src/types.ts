@@ -37,3 +37,11 @@ export type FiltersQuery = {
 export type CartItem = ProductDto & {
   quantity: number;
 };
+
+export type User = {
+  id: number;
+  username: string;
+  email: string;
+  password: string;
+  sendNewsletter: boolean;
+};

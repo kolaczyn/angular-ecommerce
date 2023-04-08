@@ -7,7 +7,7 @@ import { CartItem } from 'src/types';
 })
 export class CartService {
   private items = new BehaviorSubject<CartItem[]>([]);
-  $items = this.items.asObservable();
+  items$ = this.items.asObservable();
 
   addNew(item: CartItem) {
     const currentItems = this.items.getValue();

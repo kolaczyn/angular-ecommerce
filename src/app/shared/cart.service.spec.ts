@@ -14,7 +14,7 @@ describe('CartService', () => {
   it('should add a new item to the cart', (done) => {
     const item = { id: 1 } as CartItem;
     service.addNew(item);
-    service.$items.pipe(take(1)).subscribe((items) => {
+    service.items$.pipe(take(1)).subscribe((items) => {
       expect(items).toHaveSize(1);
       expect(items[0]).toEqual(item);
       done();

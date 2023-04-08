@@ -7,7 +7,7 @@ import { CartService } from 'src/app/shared/cart.service';
     <button (click)="loadCartWithRandomItems()">
       Load Cart With Random Items
     </button>
-    <div *ngIf="cart.$items | async as items">
+    <div *ngIf="cart.items$ | async as items">
       <div *ngFor="let item of items">
         <div>{{ item.id }} {{ item.brand }}</div>
         <button (click)="cart.removeItem(item.id)">Remove</button>
