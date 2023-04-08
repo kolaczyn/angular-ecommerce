@@ -4,6 +4,8 @@ import { FiltersComponent } from './features/filters/filters.component';
 import { AboutComponent } from './features/about/about.component';
 import { ProductPageComponent } from './features/product-page/product-page.component';
 import { CartPageModule } from './features/cart-page/cart-page.module';
+import { LoginPageComponent } from './features/auth/login-page/login-page.component';
+import { RegisterPageComponent } from './features/auth/register-page/register-page.component';
 
 const routes: Routes = [
   {
@@ -21,6 +23,14 @@ const routes: Routes = [
   {
     path: 'cart',
     loadChildren: () => CartPageModule,
+  },
+  {
+    path: 'register',
+    component: RegisterPageComponent,
+  },
+  {
+    path: 'login',
+    component: LoginPageComponent,
   },
 ];
 
